@@ -1,0 +1,55 @@
+#! /bin/bash
+## bash script to put current stash to a latest hotfix
+## licensed under BSD license, copyright Daniel Szakal
+## dependencies: bash, git, git-flow, gitflowsync (BSD)
+
+BRANCH=`git symbolic-ref --short -q HEAD` ## should be master
+
+[[ $BRANCH == "master" ]] || { echo "this script should not run on any branch apart from master" && exit 1; }
+
+[[ `git ls-files --other --exclude-standard --directory | egrep -v '/$'` == "" ]] || 
+	{ echo "There are some untracked files, I recommend you to sort this manually" && exit 1; }
+
+if [[ "$1" == '' ]]; then
+        echo "arg1 (hotfix tag) missing" && exit 1;
+fi
+
+if [[ "$2" == '' ]]; then
+        echo "arg2 (commit message) missing, also pleas use quotes for arg2" && exit 1;
+fi
+
+if [[ "$3" != '' ]]; then
+        echo "too many arguments, please use quotes for arg2 which is commit message" && exit 1;
+fi
+
+TASKS=( 
+"git stash"
+"gitflowsync pullonly"
+"git flow hotfix start $1"
+"git stash apply"
+"git commit -am '$2'"
+"git push --set-upstream origin hotfix/$1"
+"git flow hotfix finish $1"
+"git stash drop"
+"git checkout master"
+"gitflowsync push" 
+);
+
+FAIL=0;
+
+for i in "${TASKS[@]}"
+do
+	:
+	if [[ FAIL -eq 0 ]]; then
+		echo "running step: $i";
+		sh -c "$i" || 
+		{ 
+			FAIL=1; 
+			FAILEDCOMMAND=$i;
+			echo "command failed: $i";
+		};
+	else
+		echo "Because of progress error the following command did not run: $i";
+	fi
+
+done
