@@ -1,7 +1,7 @@
 #! /bin/bash
 ## bash script to put current stash to a latest hotfix
 ## licensed under BSD license, copyright Daniel Szakal
-## dependencies: bash, git, git-flow, gitflowsync (BSD)
+## dependencies: bash, git, git-flow, gitflowsync (BSD) in $PATH
 
 BRANCH=`git symbolic-ref --short -q HEAD` ## should be master
 
@@ -15,7 +15,7 @@ if [[ "$1" == '' ]]; then
 fi
 
 if [[ "$2" == '' ]]; then
-        echo "arg2 (commit message) missing, also pleas use quotes for arg2" && exit 1;
+        echo "arg2 (commit message) missing, also please use quotes for arg2" && exit 1;
 fi
 
 if [[ "$3" != '' ]]; then
