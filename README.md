@@ -6,9 +6,8 @@ Installation:
 2. Go to the folder in your terminal where you checked out the repo, there type
 
     
-    ```
+    ```c
     sudo cp gitstashtohotfix /usr/bin/gitstashtohotfix
-    
     sudo chmod o+x /usr/bin/gitstashtohotfix
     ```
 
