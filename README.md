@@ -15,7 +15,7 @@ Updating to latest version:
 
 Are you up to date?
 
-    diff ./gitstashtohotfix /usr/bin/gitstashtohotfix && echo 'up to date' || echo 'not up to date'
+    diff ./gitstashtohotfix /usr/local/bin/gitstashtohotfix && echo 'up to date' || echo 'not up to date'
 
 If not, repeat the steps stated in installation. You need to do it manually after "git pull".
 
