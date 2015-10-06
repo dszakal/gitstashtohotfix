@@ -7,8 +7,8 @@ Installation:
 
     
     ```c
-    sudo cp gitstashtohotfix /usr/bin/gitstashtohotfix
-    sudo chmod o+x /usr/bin/gitstashtohotfix
+    sudo cp gitstashtohotfix /usr/local/bin/gitstashtohotfix
+    sudo chmod o+x /usr/local/bin/gitstashtohotfix
     ```
 
 Updating to latest version:
